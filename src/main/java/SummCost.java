@@ -12,6 +12,7 @@ public class SummCost {
     public void summ() {
         ElementsCollection costCollection = productPage.tableBody.$$("div[class='inventory_item_price']");
         List<String> st = costCollection.texts();
+        System.out.println(st.toString());
         double d = 0;
         for (int i = 0; i < st.size(); i++) {
             String a = st.get(i);

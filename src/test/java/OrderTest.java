@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer;
-import utils.Log;
+//import utils.Log;
 
 import java.io.IOException;
 
@@ -26,9 +26,11 @@ public class OrderTest {
     Delete delete = new Delete();
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws IOException {
 //        Configuration.headless = true;
         Configuration.startMaximized = true;
+        loginPage.openLoginPage();
+        loginPage.login();
     }
 
     @AfterEach
@@ -40,10 +42,9 @@ public class OrderTest {
     @Test
     @Order(1)
     public void loginTest() throws IOException {
-        loginPage.openLoginPage();
-        loginPage.login();
+
         loginPage.welcomeMessage.shouldBe(visible);
-        Log.info("Находимся на главной странице товаров");
+     //   Log.info("Находимся на главной странице товаров");
         Assertions.assertEquals("PRODUCTS", loginPage.welcomeMessage.getText());
     }
 
@@ -51,29 +52,27 @@ public class OrderTest {
     @Test
     @Order(2)
     public void buyingGoodsTest() throws IOException {
-        loginPage.openLoginPage();
-        loginPage.login();
+
         productPage.addSauceLabsBikeLight.click();
         workCart.cartLink();
         productPage.finishOrder.click();
         loginPage.finishOrderPage.shouldBe(visible);
-        Log.info("Проверяем возможность купить товар.");
+       // Log.info("Проверяем возможность купить товар.");
         Assertions.assertEquals("THANK YOU FOR YOUR ORDER", loginPage.finishOrderPage.getText());
-        Log.info("После покупки продолжили выбирать товар.");
+      //  Log.info("После покупки продолжили выбирать товар.");
         productPage.back.click();
     }
 
     @Test
     @Order(3)
     public void notBuyingGoodsTest() throws IOException {
-        loginPage.openLoginPage();
-        loginPage.login();
+
         productPage.addSauceLabsBikeLight.click();
-        Log.info("Отработал метод заполнения корзины");
+     //   Log.info("Отработал метод заполнения корзины");
         workCart.cartLink();
         productPage.cancel.click();
         loginPage.welcomeMessage.shouldBe(visible);
-        Log.info("Без оплаты вышли из оформления заказа");
+    //    Log.info("Без оплаты вышли из оформления заказа");
         Assertions.assertEquals("PRODUCTS", loginPage.welcomeMessage.getText());
         //вернулись на заказы
     }
@@ -82,13 +81,12 @@ public class OrderTest {
     @Test
     @Order(4)
     public void deletingAllProductsFromTheShoppingCart() throws IOException {
-        loginPage.openLoginPage();
-        loginPage.login();
+
         add.AddAllProductsFromTheShoppingCart();
         productPage.shoppingCartLink.click();
         productPage.tableBody.shouldBe(visible);
         delete.deletingFromTheShoppingСarts();
-        Log.info("Проверка на удалине из корзины");
+       // Log.info("Проверка на удалине из корзины");
         Assertions.assertEquals(delete.shoppingSizeBefore, delete.shoppingSizeAfter + delete.shoppingSizeBefore);
         // проверка  мне не нравиться , корявая, но рабочая.
         Assertions.assertFalse(productPage.tableBody.$("div[class='cart_item']") == null);
@@ -98,13 +96,12 @@ public class OrderTest {
     @Test
     @Order(5)
     public void prise() throws IOException {
-        loginPage.openLoginPage();
-        loginPage.login();
+
         add.AddAllProductsFromTheShoppingCart();
         workCart.cartLink();
         productPage.allPage.shouldBe(visible);
         summCost.summ();
-        Log.info("Проверка итоговой суммы");
+     //   Log.info("Проверка итоговой суммы");
         Assertions.assertTrue(summCost.summ == summCost.summInThePage);
 
     }

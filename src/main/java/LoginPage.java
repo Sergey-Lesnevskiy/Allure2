@@ -1,5 +1,5 @@
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
+
 
 import java.io.FileInputStream;
 import java.io.IOException;
