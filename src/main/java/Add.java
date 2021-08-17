@@ -1,4 +1,7 @@
+import io.qameta.allure.Step;
+
 public class Add {
+    @Step("Add products")
     public void AddAllProductsFromTheShoppingCart() {
         ProductPage productPage = new ProductPage();
         productPage.addSauceLabsBikeLight.click();
