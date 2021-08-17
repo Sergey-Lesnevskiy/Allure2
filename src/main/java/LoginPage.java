@@ -1,19 +1,22 @@
 import com.codeborne.selenide.SelenideElement;
-
+import io.qameta.allure.Step;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class LoginPage extends BasePage {
+public class LoginPage {
     SelenideElement loginField = $("#user-name");
     SelenideElement passwordField = $("#password");
     SelenideElement signInButton = $("#login-button");
+    SelenideElement finishOrderPage = $("h2[class='complete-header']");
+    SelenideElement welcomeMessage = $("span[class='title']");
 
-
+    @Step("Login")
     void login() throws IOException {
         Properties props = new Properties();
         props.load(new FileInputStream("src/main/resources/user.properties"));
@@ -26,5 +29,11 @@ public class LoginPage extends BasePage {
         open("https://www.saucedemo.com/");
     }
 
+    public void finishOrderPage() {
+        finishOrderPage.shouldBe(visible);
+    }
 
+    public void welcomeMessage() {
+        welcomeMessage.shouldBe(visible);
+    }
 }

@@ -12,7 +12,7 @@ public class SummCost {
     public void summ() {
         ElementsCollection costCollection = productPage.tableBody.$$("div[class='inventory_item_price']");
         List<String> st = costCollection.texts();
-        System.out.println(st.toString());
+
         double d = 0;
         for (int i = 0; i < st.size(); i++) {
             String a = st.get(i);
@@ -20,7 +20,7 @@ public class SummCost {
             d = Double.parseDouble(s2);
             summ = summ + d;
         }
-        System.out.println(summ);
+
         SelenideElement costSite = productPage.allPage.$("div[class='summary_subtotal_label']");
         // способ прим изменении кол-во текста не будет работать
 //       String s = costSite.text();
@@ -33,7 +33,7 @@ public class SummCost {
             s = s.replace(c, ' ');
         }
         summInThePage = Double.parseDouble(s);
-        System.out.println(summInThePage);
+
 
     }
 }

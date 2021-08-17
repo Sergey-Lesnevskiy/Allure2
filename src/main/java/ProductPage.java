@@ -1,9 +1,10 @@
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
-public class ProductPage extends BasePage {
+public class ProductPage {
     //товары
     SelenideElement addSauceLabsBackpack = $(By.name("add-to-cart-sauce-labs-backpack"));
     SelenideElement addSauceLabsBoltT_Shirt = $("#add-to-cart-sauce-labs-bolt-t-shirt");
@@ -26,4 +27,38 @@ public class ProductPage extends BasePage {
     SelenideElement tableBody = $("div[class='cart_list']");
 
 
+    public void addBike() {
+        addSauceLabsBikeLight.click();
+    }
+
+    public void addSauceLabsBikeLight() {
+        addSauceLabsBikeLight.click();
+    }
+
+    public void finishOrder() {
+        finishOrder.click();
+    }
+
+
+    public void back() {
+        back.click();
+    }
+
+    public void cancel() {
+        cancel.click();
+    }
+
+
+    public void shoppingCartLink() {
+        shoppingCartLink.click();
+    }
+
+
+    public void tableBody() {
+        tableBody.shouldBe(visible);
+    }
+
+    public void allPage() {
+        allPage.shouldBe(visible);
+    }
 }

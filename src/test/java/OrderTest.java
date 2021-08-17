@@ -1,19 +1,11 @@
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.*;
-
 import com.codeborne.selenide.Configuration;
-
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.MethodOrderer;
-//import utils.Log;
+import io.qameta.allure.*;
+import org.junit.jupiter.api.*;
+import utils.Log;
 
 import java.io.IOException;
+
+import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -38,70 +30,96 @@ public class OrderTest {
         closeWebDriver();
     }
 
-    //вход на страницу
+    @Description("login Test")
+    @Severity(SeverityLevel.BLOCKER)
+    @Feature("login Test")
+    @Issue("123321")
+    @Link("https://www.saucedemo.com/")
+    @Owner("Segey")
     @Test
     @Order(1)
-    public void loginTest() throws IOException {
-
-        loginPage.welcomeMessage.shouldBe(visible);
-     //   Log.info("Находимся на главной странице товаров");
+    public void loginTest() {
+        loginPage.welcomeMessage();
+        Log.info("Находимся на главной странице товаров");
         Assertions.assertEquals("PRODUCTS", loginPage.welcomeMessage.getText());
     }
 
     //Покупка
+
+    @Description("Bye product")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("Bye product")
+    @Issue("123321")
+    @Link("https://www.saucedemo.com/")
+    @Owner("Segey")
     @Test
     @Order(2)
-    public void buyingGoodsTest() throws IOException {
-
-        productPage.addSauceLabsBikeLight.click();
+    public void buyingGoodsTest() {
+        productPage.addBike();
         workCart.cartLink();
-        productPage.finishOrder.click();
-        loginPage.finishOrderPage.shouldBe(visible);
-       // Log.info("Проверяем возможность купить товар.");
+        productPage.finishOrder();
+        loginPage.finishOrderPage();
+        Log.info("Проверяем возможность купить товар.");
         Assertions.assertEquals("THANK YOU FOR YOUR ORDER", loginPage.finishOrderPage.getText());
-      //  Log.info("После покупки продолжили выбирать товар.");
-        productPage.back.click();
+        Log.info("После покупки продолжили выбирать товар.");
+        productPage.back();
     }
 
+    @Description("not bye product")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("not bye product")
+    @Issue("123321")
+    @Link("https://www.saucedemo.com/")
+    @Owner("Segey")
     @Test
     @Order(3)
     public void notBuyingGoodsTest() throws IOException {
 
-        productPage.addSauceLabsBikeLight.click();
-     //   Log.info("Отработал метод заполнения корзины");
+        productPage.addSauceLabsBikeLight();
+        Log.info("Отработал метод заполнения корзины");
         workCart.cartLink();
-        productPage.cancel.click();
-        loginPage.welcomeMessage.shouldBe(visible);
-    //    Log.info("Без оплаты вышли из оформления заказа");
+        productPage.cancel();
+        loginPage.welcomeMessage();
+        //    Log.info("Без оплаты вышли из оформления заказа");
         Assertions.assertEquals("PRODUCTS", loginPage.welcomeMessage.getText());
         //вернулись на заказы
     }
 
-    //удаление заказов
+    @Description("deleting products")
+    @Severity(SeverityLevel.NORMAL)
+    @Feature("deleting products")
+    @Issue("123321")
+    @Link("https://www.saucedemo.com/")
+    @Owner("Segey")
     @Test
     @Order(4)
-    public void deletingAllProductsFromTheShoppingCart() throws IOException {
+    public void deletingAllProductsFromTheShoppingCartTest() throws IOException {
 
         add.AddAllProductsFromTheShoppingCart();
-        productPage.shoppingCartLink.click();
-        productPage.tableBody.shouldBe(visible);
+        productPage.shoppingCartLink();
+        productPage.tableBody();
         delete.deletingFromTheShoppingСarts();
-       // Log.info("Проверка на удалине из корзины");
+        Log.info("Проверка на удалине из корзины");
         Assertions.assertEquals(delete.shoppingSizeBefore, delete.shoppingSizeAfter + delete.shoppingSizeBefore);
         // проверка  мне не нравиться , корявая, но рабочая.
         Assertions.assertFalse(productPage.tableBody.$("div[class='cart_item']") == null);
         //проверка селектора на существование
     }
-    //проверка цены
+
+    @Description("check summ")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("check summ")
+    @Issue("123321")
+    @Link("https://www.saucedemo.com/")
+    @Owner("Segey")
     @Test
     @Order(5)
-    public void prise() throws IOException {
-
+    public void priseTest() {
         add.AddAllProductsFromTheShoppingCart();
         workCart.cartLink();
-        productPage.allPage.shouldBe(visible);
+        productPage.allPage();
         summCost.summ();
-     //   Log.info("Проверка итоговой суммы");
+        //   Log.info("Проверка итоговой суммы");
         Assertions.assertTrue(summCost.summ == summCost.summInThePage);
 
     }

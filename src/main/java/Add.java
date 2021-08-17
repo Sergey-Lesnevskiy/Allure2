@@ -1,6 +1,6 @@
 public class Add {
-    public void AddAllProductsFromTheShoppingCart(){
-        ProductPage productPage=new ProductPage();
+    public void AddAllProductsFromTheShoppingCart() {
+        ProductPage productPage = new ProductPage();
         productPage.addSauceLabsBikeLight.click();
         productPage.addTestallTheThingsT_ShirtRed.click();
         productPage.addSauceLabsBackpack.click();

@@ -1,6 +1,6 @@
 public class WorkCart {
-    public void cartLink(){
-        ProductPage productPage=new ProductPage();
+    public void cartLink() {
+        ProductPage productPage = new ProductPage();
         productPage.shoppingCartLink.click();
         productPage.checkout.click();
         productPage.addOrderFirstName.sendKeys("we");
