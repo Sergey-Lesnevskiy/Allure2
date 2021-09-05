@@ -9,6 +9,7 @@ public class SummCost {
     ProductPage productPage = new ProductPage();
     double summ = 0;
     double summInThePage = 0;
+
     @Step("Check summ")
     public void summ() {
         ElementsCollection costCollection = productPage.tableBody.$$("div[class='inventory_item_price']");

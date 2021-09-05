@@ -30,14 +30,15 @@ public class OrderTest {
         closeWebDriver();
     }
 
+    @Attachment
     @Description("login Test")
     @Severity(SeverityLevel.BLOCKER)
     @Feature("login Test")
     @Issue("123321")
     @Link("https://www.saucedemo.com/")
-    @Owner("Segey")
+    @Owner("Sergey")
     @Test
-    @Order(1)
+    @Order(2)
     public void loginTest() {
         loginPage.welcomeMessage();
         Log.info("Находимся на главной странице товаров");
@@ -45,15 +46,15 @@ public class OrderTest {
     }
 
     //Покупка
-
+    @Attachment
     @Description("Bye product")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Bye product")
     @Issue("123321")
     @Link("https://www.saucedemo.com/")
-    @Owner("Segey")
+    @Owner("Sergey")
     @Test
-    @Order(2)
+    @Order(1)
     public void buyingGoodsTest() {
         productPage.addBike();
         workCart.cartLink();
@@ -70,7 +71,7 @@ public class OrderTest {
     @Feature("not bye product")
     @Issue("123321")
     @Link("https://www.saucedemo.com/")
-    @Owner("Segey")
+    @Owner("Sergey")
     @Test
     @Order(3)
     public void notBuyingGoodsTest() throws IOException {
@@ -90,9 +91,9 @@ public class OrderTest {
     @Feature("deleting products")
     @Issue("123321")
     @Link("https://www.saucedemo.com/")
-    @Owner("Segey")
+    @Owner("Sergey")
     @Test
-    @Order(4)
+    @Order(5)
     public void deletingAllProductsFromTheShoppingCartTest() throws IOException {
 
         add.AddAllProductsFromTheShoppingCart();
@@ -111,9 +112,9 @@ public class OrderTest {
     @Feature("check summ")
     @Issue("123321")
     @Link("https://www.saucedemo.com/")
-    @Owner("Segey")
+    @Owner("Sergey")
     @Test
-    @Order(5)
+    @Order(4)
     public void priseTest() {
         add.AddAllProductsFromTheShoppingCart();
         workCart.cartLink();
